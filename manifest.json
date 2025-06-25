@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Ci-en Media Downloader",
+  "version": "1.0",
+  "description": "Ci-enのページにある動画や音声をダウンロードします。",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://ci-en.jp/*"
+  ],
+  "action": {
+    "default_title": "メディアをダウンロード",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon.png",
+    "128": "icon128.png"
+  }
+}
