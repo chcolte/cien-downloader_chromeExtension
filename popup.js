@@ -33,11 +33,9 @@ function populatePopup(mediaInfos) {
   statusEl.style.display = 'none';
   downloadAllBtn.style.display = 'block';
 
-  // 「すべてダウンロード」ボタンの処理
+  
   downloadAllBtn.addEventListener('click', () => {
-    // === ▼ここからが重要変更点(3) 通知表示 ===
     showNotification(`全 ${mediaInfos.length} 件のダウンロードを開始します...`);
-    // === ▲ここまで ===
     mediaInfos.forEach(info => {
       chrome.downloads.download({ url: info.src, filename: info.filename });
     });
@@ -51,11 +49,8 @@ function populatePopup(mediaInfos) {
     itemEl.title = info.filename; // 省略されてもホバーでフルネームが見えるように
 
     itemEl.addEventListener('click', () => {
-      // === ▼ここからが重要変更点(3) 通知表示 ===
-      // ファイル名が長すぎる場合、通知では短縮して表示
       const displayName = info.filename.length > 40 ? info.filename.substring(0, 37) + '...' : info.filename;
       showNotification(`「${displayName}」のダウンロードを開始しました。`);
-      // === ▲ここまで ===
       chrome.downloads.download({
         url: info.src,
         filename: info.filename
@@ -65,7 +60,6 @@ function populatePopup(mediaInfos) {
   });
 }
 
-// === ▼ここからが重要変更点(3) 通知表示のための関数 ===
 let notificationTimer; // タイムアウトIDを保持する変数
 
 /**
@@ -85,11 +79,9 @@ function showNotification(message) {
     notificationEl.style.display = 'none';
   }, 3000);
 }
-// === ▲ここまで ===
 
 /**
  * この関数はブラウザのページ上で実行される
- * (この関数の内容は変更ありません)
  */
 function getAllMediaInfo() {
   const mediaElements = document.querySelectorAll(
